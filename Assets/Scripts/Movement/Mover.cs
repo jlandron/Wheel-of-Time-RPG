@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement {
-    public class Mover : MonoBehaviour {
+    public class Mover : MonoBehaviour, IAction {
         NavMeshAgent navMeshAgent;
         [SerializeField] Transform target;
         private void Start( ) {
@@ -19,9 +19,6 @@ namespace RPG.Movement {
             float speed = localVelocity.z;
             GetComponentInChildren<Animator>( ).SetFloat( "ForwardSpeed", speed );
         }
-        public void Stop( ) {
-            navMeshAgent.isStopped = true;
-        }
         public void MoveTo( Vector3 destination ) {
             GetComponent<NavMeshAgent>( ).destination = destination;
             navMeshAgent.isStopped = false;
@@ -29,6 +26,10 @@ namespace RPG.Movement {
         public void StartMoveAction( Vector3 destination ) {
             GetComponent<ActionScheduler>( ).StartAction( this );
             MoveTo( destination );
+        }
+        public void Cancel( ) {
+            navMeshAgent.velocity = Vector3.zero;
+            navMeshAgent.isStopped = true;
         }
     }
 }
