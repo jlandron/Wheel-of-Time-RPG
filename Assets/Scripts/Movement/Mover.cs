@@ -7,6 +7,7 @@ namespace RPG.Movement {
     public class Mover : MonoBehaviour, IAction {
         NavMeshAgent navMeshAgent;
         [SerializeField] Transform target;
+        private bool dead = false;
         private void Start( ) {
             navMeshAgent = GetComponent<NavMeshAgent>( );
         }

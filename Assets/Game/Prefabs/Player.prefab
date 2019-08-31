@@ -22,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.8610141
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
@@ -32,27 +32,27 @@ PrefabInstance:
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -18.855053
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.8569427
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.5154118
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -242.04999
       objectReference: {fileID: 0}
     - target: {fileID: 7549318710313510618, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
         type: 3}
@@ -78,6 +78,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549318710313510614, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2,
+        type: 3}
+      propertyPath: weaponRange
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fb4ea19ea4555b4180ce85c64d3a3c2, type: 3}
@@ -148,5 +153,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Knights_Soldier_02
       objectReference: {fileID: 0}
+    - target: {fileID: 13707166, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6fc0cf5e5d31c458bc74ede87cb8ae, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}

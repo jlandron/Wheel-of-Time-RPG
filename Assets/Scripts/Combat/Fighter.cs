@@ -1,5 +1,5 @@
-﻿using RPG.Movement;
-using RPG.Core;
+﻿using RPG.Core;
+using RPG.Movement;
 using UnityEngine;
 
 namespace RPG.Combat {
@@ -9,18 +9,19 @@ namespace RPG.Combat {
         [SerializeField] float timeBetweenAttacks = 1.0f;
         [SerializeField] float weaponDamage = 10f;
 
-        private float timeSinceLastAttack; 
+        private float timeSinceLastAttack;
 
         Mover mover;
-        Transform target;
+        Health target;
         private void Start( ) {
             mover = GetComponent<Mover>( );
         }
         private void Update( ) {
             timeSinceLastAttack += Time.deltaTime;
             if( !target ) return;
+            if( target.isDead ) return;
             if( !GetIsInRange( ) ) {
-                mover.MoveTo( target.position );
+                mover.MoveTo( target.transform.position );
             } else {
                 mover.Cancel( );
                 AttackBehavior( );
@@ -28,7 +29,9 @@ namespace RPG.Combat {
         }
 
         private void AttackBehavior( ) {
-            if(timeSinceLastAttack >= timeBetweenAttacks ) {
+            transform.LookAt( target.transform );
+            if( timeSinceLastAttack >= timeBetweenAttacks ) {
+                GetComponent<Animator>( ).ResetTrigger( "StopAttack" );
                 GetComponent<Animator>( ).SetTrigger( "Attack" );
                 //triggers Hit event at the right time
                 timeSinceLastAttack = 0;
@@ -36,20 +39,22 @@ namespace RPG.Combat {
         }
         //animation event
         void Hit( ) {
-            target.GetComponent<Health>( ).TakeDamage( weaponDamage );
+            target.TakeDamage( weaponDamage );
         }
         private bool GetIsInRange( ) {
-            return Vector3.Distance( transform.position, target.position ) <= weaponRange;
+            return Vector3.Distance( transform.position, target.transform.position ) <= weaponRange;
         }
 
         public void Attack( CombatTarget combatTarget ) {
             GetComponent<ActionScheduler>( ).StartAction( this );
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>( );
         }
         public void Cancel( ) {
+            GetComponent<Animator>( ).ResetTrigger( "Attack" );
+            GetComponent<Animator>( ).SetTrigger( "StopAttack" );
             target = null;
         }
-        
+
     }
 
 }
