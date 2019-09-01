@@ -1,17 +1,22 @@
 ﻿using RPG.Core;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement {
     public class Mover : MonoBehaviour, IAction {
-        NavMeshAgent navMeshAgent;
+
         [SerializeField] Transform target;
-        private bool dead = false;
+        [SerializeField] float maxSpeed = 5.66f;
+
+        private NavMeshAgent _navMeshAgent;
+        private Health _health;
+
         private void Start( ) {
-            navMeshAgent = GetComponent<NavMeshAgent>( );
+            _navMeshAgent = GetComponent<NavMeshAgent>( );
+            _health = GetComponent<Health>( );
         }
         void Update( ) {
+            _navMeshAgent.enabled = !_health.isDead;
             UpdateAnimator( );
         }
         private void UpdateAnimator( ) {
@@ -22,15 +27,18 @@ namespace RPG.Movement {
         }
         public void MoveTo( Vector3 destination ) {
             GetComponent<NavMeshAgent>( ).destination = destination;
-            navMeshAgent.isStopped = false;
+            _navMeshAgent.isStopped = false;
         }
         public void StartMoveAction( Vector3 destination ) {
             GetComponent<ActionScheduler>( ).StartAction( this );
             MoveTo( destination );
         }
         public void Cancel( ) {
-            navMeshAgent.velocity = Vector3.zero;
-            navMeshAgent.isStopped = true;
+            _navMeshAgent.velocity = Vector3.zero;
+            _navMeshAgent.isStopped = true;
+        }
+        public void SetMaxSpeed(float speed ) {
+            _navMeshAgent.speed = speed;
         }
     }
 }
