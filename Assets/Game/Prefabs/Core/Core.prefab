@@ -101,6 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3782109266268026802}
+  - component: {fileID: 1677614927355357150}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -126,6 +127,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1677614927355357150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782109266268026801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec27ce3b4daf0b4fa826736ab16e9e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peristantObjectPrefab: {fileID: 0}
 --- !u!1001 &1579718565672849528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 2418584718416044316, guid: 6010c015afe59f34d99e035553db8279,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.459234
+      value: 6.324196
       objectReference: {fileID: 0}
     - target: {fileID: 2418584718416044316, guid: 6010c015afe59f34d99e035553db8279,
         type: 3}
@@ -216,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 5262073098549097254, guid: c754c86b63334aa488c80cc2f05e9b78,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7299614
+      value: -1.865
       objectReference: {fileID: 0}
     - target: {fileID: 5262073098549097254, guid: c754c86b63334aa488c80cc2f05e9b78,
         type: 3}
@@ -291,7 +305,7 @@ PrefabInstance:
     - target: {fileID: 8321416366649249175, guid: aab5beb8d15523c45a31b6298c95de83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.459234
+      value: 6.324196
       objectReference: {fileID: 0}
     - target: {fileID: 8321416366649249175, guid: aab5beb8d15523c45a31b6298c95de83,
         type: 3}
@@ -338,16 +352,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8321416366649249168, guid: aab5beb8d15523c45a31b6298c95de83,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 9041648932378099619}
     - target: {fileID: 8321416366649249174, guid: aab5beb8d15523c45a31b6298c95de83,
         type: 3}
       propertyPath: m_Name
       value: Follow Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8321416366649249168, guid: aab5beb8d15523c45a31b6298c95de83,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 9041648932378099619}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aab5beb8d15523c45a31b6298c95de83, type: 3}
 --- !u!4 &3782109265511475775 stripped

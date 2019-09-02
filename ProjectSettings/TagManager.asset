@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water
   - FollowCamera
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

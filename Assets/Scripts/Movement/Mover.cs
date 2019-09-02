@@ -6,7 +6,6 @@ namespace RPG.Movement {
     public class Mover : MonoBehaviour, IAction {
 
         [SerializeField] Transform target;
-        [SerializeField] float maxSpeed = 5.66f;
 
         private NavMeshAgent _navMeshAgent;
         private Health _health;
