@@ -18,11 +18,10 @@ namespace RPG.SceneManagment {
         }
 
         private void SpawnPersistantObjects( ) {
-            foreach(GameObject gameObject in peristantObjectPrefabs ) {
+            foreach( GameObject gameObject in peristantObjectPrefabs ) {
                 GameObject persistantObject = Instantiate( gameObject );
                 DontDestroyOnLoad( persistantObject );
             }
         }
     }
-
 }

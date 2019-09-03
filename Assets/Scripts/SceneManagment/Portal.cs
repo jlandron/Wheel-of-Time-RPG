@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using RPG.Saving;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 namespace RPG.SceneManagment {
@@ -8,15 +10,18 @@ namespace RPG.SceneManagment {
         enum DestinationIdentifier {
             A, B, C, D, E
         }
+
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] Transform spawnPoint;
         [SerializeField] DestinationIdentifier destination;
         [SerializeField] float fadeOutTime = 3f;
         [SerializeField] float fadeInTime = 3f;
 
-        private Fader fader;
+        private Fader _fader;
+        private SavingWrapper _saver;
         private void Start( ) {
             spawnPoint = GetComponentInChildren<Transform>( );
+            _saver = FindObjectOfType<SavingWrapper>( );
         }
         private void OnTriggerEnter( Collider other ) {
             if( other.tag == "Player" ) {
@@ -30,25 +35,32 @@ namespace RPG.SceneManagment {
             }
             
             DontDestroyOnLoad( gameObject );
-            fader = FindObjectOfType<Fader>( );
-            if( !fader ) {
+            _fader = FindObjectOfType<Fader>( );
+            if( !_fader ) {
                 Debug.Log( "fader not found!" );
             }
-            yield return fader.FadeOut( fadeOutTime );
-
+            yield return _fader.FadeOut( fadeOutTime );
+         
+            _saver.Save( );
             yield return SceneManager.LoadSceneAsync( sceneToLoad );
+            _saver.Load( );
+
             Portal otherPortal = GetOtherPortal( );
             UpdatePlayer( otherPortal );
+            //save again as a checkpoint after initial loading
+            _saver.Save( );
 
             yield return new WaitForSeconds( fadeInTime );
-            yield return fader.FadeIn( fadeInTime );
+            yield return _fader.FadeIn( fadeInTime );
             Destroy( gameObject );
         }
 
         private void UpdatePlayer( Portal otherPortal ) {
             GameObject player = GameObject.FindWithTag( "Player" );
+            player.GetComponent<NavMeshAgent>( ).enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
+            player.GetComponent<NavMeshAgent>( ).enabled = true;
         }
 
         private Portal GetOtherPortal( ) {
