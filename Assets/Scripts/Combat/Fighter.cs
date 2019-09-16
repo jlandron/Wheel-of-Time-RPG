@@ -5,20 +5,18 @@ using UnityEngine;
 namespace RPG.Combat {
     public class Fighter : MonoBehaviour, IAction {
 
-        [SerializeField] float weaponRange = 2.0f;
-        [SerializeField] float timeBetweenAttacks = 1.0f;
-        [SerializeField] float weaponDamage = 10f;
-        [SerializeField] GameObject weaponPrefab = null;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] AnimatorOverrideController weaponOverride = null;
+        [SerializeField] Weapon defaultWeapon = null;
 
         private float _timeSinceLastAttack = Mathf.Infinity;
 
         private Mover _mover;
         private Health _target;
+        private Weapon _currentWeapon;
+
         private void Start( ) {
             _mover = GetComponent<Mover>( );
-            SpawnWeapon( );
+            EquipWeapon( defaultWeapon );
         }
         private void Update( ) {
             _timeSinceLastAttack += Time.deltaTime;
@@ -31,15 +29,18 @@ namespace RPG.Combat {
                 AttackBehavior( );
             }
         }
-        public void SpawnWeapon() {
-            Instantiate( weaponPrefab, handTransform );
-
+        public void EquipWeapon( Weapon weapon ) {
+            if(weapon == null ) {
+                Debug.Log( "No default weapon" );
+                return;
+            }
+            _currentWeapon = weapon;
             Animator animator = GetComponent<Animator>( );
-            animator.runtimeAnimatorController = weaponOverride;
+            _currentWeapon.spawn( handTransform, animator );
         }
         private void AttackBehavior( ) {
             transform.LookAt( _target.transform );
-            if( _timeSinceLastAttack >= timeBetweenAttacks ) {
+            if( _timeSinceLastAttack >= _currentWeapon.getTimeBetweenAttacks() ) {
                 GetComponent<Animator>( ).ResetTrigger( "StopAttack" );
                 GetComponent<Animator>( ).SetTrigger( "Attack" );
                 //triggers Hit event at the right time
@@ -49,10 +50,10 @@ namespace RPG.Combat {
         //animation event
         void Hit( ) {
             if( _target == null ) { return; }
-            _target.TakeDamage( weaponDamage );
+            _target.TakeDamage( _currentWeapon.getWeaponDamage() );
         }
         private bool GetIsInRange( ) {
-            return Vector3.Distance( transform.position, _target.transform.position ) <= weaponRange;
+            return Vector3.Distance( transform.position, _target.transform.position ) <= _currentWeapon.getWeaponRange();
         }
         public bool CanAttack( GameObject combatTarget ) {
             if(combatTarget == null ) { return false; }
