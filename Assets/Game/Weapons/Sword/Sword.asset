@@ -18,3 +18,4 @@ MonoBehaviour:
   weaponRange: 3
   timeBetweenAttacks: 2
   weaponDamage: 20
+  isRightHanded: 1

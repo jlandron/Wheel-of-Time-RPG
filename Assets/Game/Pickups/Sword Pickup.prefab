@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6235913273998665557}
+  - component: {fileID: 1107922780}
+  - component: {fileID: 1107922779}
   m_Layer: 0
   m_Name: Sword Pickup
   m_TagString: Untagged
@@ -31,6 +33,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1107922780
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214061927524904395}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.25, z: 1.61}
+  m_Center: {x: 0, y: 0, z: -0.5}
+--- !u!114 &1107922779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214061927524904395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696594a0e24820a4dba2cdece779d853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: 48ff5065d5b5a8a4d9c299dc0713bf0b, type: 2}
 --- !u!1001 &9142819130648408718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,10 +66,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6235913273998665557}
     m_Modifications:
-    - target: {fileID: 1990641296273112, guid: 20515f88563ab2f47a21653ebf68db85, type: 3}
-      propertyPath: m_Name
-      value: sword_1
-      objectReference: {fileID: 0}
     - target: {fileID: 4372482557233378, guid: 20515f88563ab2f47a21653ebf68db85, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.764
@@ -97,6 +121,10 @@ PrefabInstance:
     - target: {fileID: 4372482557233378, guid: 20515f88563ab2f47a21653ebf68db85, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.39999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1990641296273112, guid: 20515f88563ab2f47a21653ebf68db85, type: 3}
+      propertyPath: m_Name
+      value: sword_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20515f88563ab2f47a21653ebf68db85, type: 3}

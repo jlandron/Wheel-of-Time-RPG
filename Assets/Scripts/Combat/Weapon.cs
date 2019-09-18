@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Combat {
@@ -10,25 +9,44 @@ namespace RPG.Combat {
         [SerializeField] private float weaponRange = 2.0f;
         [SerializeField] private float timeBetweenAttacks = 1.0f;
         [SerializeField] private float weaponDamage = 10f;
+        [SerializeField] private bool isRightHanded = true;
+        [SerializeField] private Projectile projectile = null;
 
 
-        public void spawn(Transform handTransform, Animator animator ) {
-            if(weaponPrefab != null ) {
-                Instantiate( weaponPrefab, handTransform );
+        public void Spawn( Transform rightHand, Transform leftHand, Animator animator ) {
+            if( weaponPrefab != null ) {
+                Transform hand = GetWeaponHand( rightHand, leftHand );
+                Instantiate( weaponPrefab, hand );
             }
-            if(animatorOverride != null ) {
+            if( animatorOverride != null ) {
                 animator.runtimeAnimatorController = animatorOverride;
             }
-            
+
         }
-        public float getWeaponRange( ) {
+
+        private Transform GetWeaponHand( Transform rightHand, Transform leftHand ) {
+            if( isRightHanded ) {
+                return rightHand;
+            }
+            return leftHand;
+        }
+
+        public float GetWeaponRange( ) {
             return weaponRange;
         }
-        public float getTimeBetweenAttacks( ) {
+        public float GetTimeBetweenAttacks( ) {
             return timeBetweenAttacks;
         }
-        public float getWeaponDamage( ) {
+        public float GetWeaponDamage( ) {
             return weaponDamage;
+        }
+        public bool HasProjectile( ) {
+            return ( projectile != null );
+        }
+        public void LaunchProjectile( Transform rightHand, Transform leftHand, Health target ) {
+            Transform hand = GetWeaponHand( rightHand, leftHand );
+            Projectile projInstance = Instantiate( projectile , hand.position , Quaternion.identity);
+            projInstance.SetTarget( target );
         }
     }
 }

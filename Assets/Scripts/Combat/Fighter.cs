@@ -5,7 +5,8 @@ using UnityEngine;
 namespace RPG.Combat {
     public class Fighter : MonoBehaviour, IAction {
 
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] Transform rightHand = null;
+        [SerializeField] Transform leftHand = null;
         [SerializeField] Weapon defaultWeapon = null;
 
         private float _timeSinceLastAttack = Mathf.Infinity;
@@ -36,11 +37,11 @@ namespace RPG.Combat {
             }
             _currentWeapon = weapon;
             Animator animator = GetComponent<Animator>( );
-            _currentWeapon.spawn( handTransform, animator );
+            _currentWeapon.Spawn( rightHand, leftHand, animator );
         }
         private void AttackBehavior( ) {
             transform.LookAt( _target.transform );
-            if( _timeSinceLastAttack >= _currentWeapon.getTimeBetweenAttacks() ) {
+            if( _timeSinceLastAttack >= _currentWeapon.GetTimeBetweenAttacks() ) {
                 GetComponent<Animator>( ).ResetTrigger( "StopAttack" );
                 GetComponent<Animator>( ).SetTrigger( "Attack" );
                 //triggers Hit event at the right time
@@ -50,10 +51,16 @@ namespace RPG.Combat {
         //animation event
         void Hit( ) {
             if( _target == null ) { return; }
-            _target.TakeDamage( _currentWeapon.getWeaponDamage() );
+            _target.TakeDamage( _currentWeapon.GetWeaponDamage() );
+        }
+        void Shoot( ) {
+            if( _target == null ) { return; }
+            if( _currentWeapon.HasProjectile( ) ) {
+                _currentWeapon.LaunchProjectile( rightHand, leftHand, _target );
+            }
         }
         private bool GetIsInRange( ) {
-            return Vector3.Distance( transform.position, _target.transform.position ) <= _currentWeapon.getWeaponRange();
+            return Vector3.Distance( transform.position, _target.transform.position ) <= _currentWeapon.GetWeaponRange();
         }
         public bool CanAttack( GameObject combatTarget ) {
             if(combatTarget == null ) { return false; }
