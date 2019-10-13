@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RPG.Core {
     public class Health : MonoBehaviour, ISaveable {
         [SerializeField] float maxHealth = 100f;
-        [SerializeField] float currentHealth;
+        [SerializeField] float currentHealth = 100f;
 
         private bool _isDead = false;
         public bool isDead {
