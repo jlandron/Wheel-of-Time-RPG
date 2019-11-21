@@ -12,8 +12,6 @@ namespace RPG.SceneManagment {
             fader.FadeOutImmeduate( );
             yield return GetComponent<SavingSystem>( ).LoadLastScene( defaultSaveFile );
             yield return fader.FadeIn( fadeInTime );
-
-
         }
 
         void Update( ) {
